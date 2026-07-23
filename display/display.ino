@@ -10,7 +10,7 @@
 #define SCREEN_ADDRESS 0x3C //Change to 0x3D if the screen doesn't update
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-//5 lines of 16 characters, 4 new lines, and one null terminator
+//4 lines of 20 characters, 4 new lines, and one null terminator
 const byte numChars = 85;
 byte index = 0;
 char receivedChars[numChars];
@@ -41,12 +41,9 @@ void getSentence(void){
           index = 0;
           newDataReady = true;
         }
-
       }
       else if (currentChar == start) isReceiving = true;
     }
-    
-
 }
 
 void setup() {
@@ -63,7 +60,6 @@ void setup() {
   display.setTextSize(1);
   display.setTextColor(WHITE, BLACK);
   display.setTextWrap(true);
-
 }
 
 void loop() {
@@ -78,7 +74,4 @@ void loop() {
 
     newDataReady = false;
   }
-
-
-
 }

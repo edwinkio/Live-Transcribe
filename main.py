@@ -8,8 +8,8 @@ import sounddevice as sd
 
 from vosk import Model, KaldiRecognizer
 
-#vosk parameters
-sample_rate = 16000
+#vosk parameters with usb sample rate; note that vosk will downsample 
+sample_rate = 44100
 channel = 1
 vosk_model = "vosk-model-small-en-us-0.15"
 
@@ -19,8 +19,8 @@ print("Vosk has successfully loaded!")
 
 q = queue.Queue()
 
-#arduino nano is connected to COM5, but this may differ on different operating systems
-arduino = serial.Serial(port="COM5", baudrate=115200, timeout=0.1)
+#arduino nano is connected to /dev/ttyUSB0, but this may differ on different microprocessors
+arduino = serial.Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=0.1)
 arduino.reset_output_buffer()
 
 time.sleep(2)
@@ -41,20 +41,20 @@ final_sentence = ""
 def process_stream(final_text, partial_text, char_per_line, num_lines):
     """
     Encodes the stream (both partial and the final sentence) into a custom Serial communication system
-    < - denotes the start of the character stream
-    > - denotes the end of the character stream
+    ( - denotes the start of the character stream
+    ) - denotes the end of the character stream
     """
     current_text = final_text + " " + partial_text
 
     #use 20 characters per line, since a defult character is 8x5
     wrapped = textwrap.wrap(current_text, char_per_line)
     #get the last num_lines (here, it's 4 lines)
-    formatted = "<" + "\n".join(wrapped[-1 * num_lines:]) + ">"
+    formatted = "(" + "\n".join(wrapped[-1 * num_lines:]) + ")"
     arduino.write(formatted.encode('utf-8'))
 
 #open live audio stream
 try:
-    with sd.InputStream(samplerate=sample_rate, blocksize=8000, channels=channel, dtype="int16", callback=callback_func):
+    with sd.InputStream(samplerate=sample_rate, blocksize=22050, device=1, channels=channel, dtype="int16", callback=callback_func):
         print("Reading input stream...")
 
         while True:
@@ -63,7 +63,7 @@ try:
                 final_json = json.loads(recognizer.FinalResult())
                 if final_json:
                     final_text = final_json.get("text", "")
-                    final_sentence += final_text + ""
+                    final_sentence += final_text + " "
                     process_stream(final_sentence, "", char_per_line=20, num_lines=4)
             else:
                 partial_json = json.loads(recognizer.PartialResult())

@@ -20,8 +20,8 @@ bool newDataReady = false;
 
 void getSentence(void){
 
-  char start = '<';
-  char end = '>';
+  char start = '(';
+  char end = ')';
   char currentChar;
 
   while (Serial.available() && !newDataReady){
@@ -47,7 +47,7 @@ void getSentence(void){
 }
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   Serial.setTimeout(10);
   
   //Initialize the display

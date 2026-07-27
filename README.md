@@ -37,5 +37,5 @@ arduino-cli compile --fqbn arduino:avr:nano --output-dir . ~/Live-Transcribe/dis
 sudo avrdude -v -p atmega328p -c arduino -P /dev/ttyUSB0 -b 115200 -U flash:w:display.ino.hex:i
 ```
 
-Replace `/dev/ttyUSB0` with the location of the Arduino Nano. After flashing is complete, run `main.py`
+Replace `/dev/ttyUSB0` with the location of the Arduino Nano. After flashing is complete, run `main.py`.
 Note that you may have to update the port parameter in `main.py`.

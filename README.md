@@ -26,6 +26,8 @@ An in depth view into the project architecture can be found [here](link).
 3. Upload/Flash the file to the Nano
 4. Run `main.py`
 
+Note that you may have to update the port parameter in `main.py`.
+
 **Option 2 (Linux / Raspberry Pi)**
 
 If you're deploying directly from the Pi, you must first flash the Arduino Nano using `arduino-cli`. In the `display` folder, run:
@@ -36,3 +38,4 @@ sudo avrdude -v -p atmega328p -c arduino -P /dev/ttyUSB0 -b 115200 -U flash:w:di
 ```
 
 Replace `/dev/ttyUSB0` with the location of the Arduino Nano. After flashing is complete, run `main.py`
+Note that you may have to update the port parameter in `main.py`.

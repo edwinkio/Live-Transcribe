@@ -8,7 +8,7 @@ import sounddevice as sd
 
 from vosk import Model, KaldiRecognizer
 
-#vosk parameters with usb sample rate; note that vosk will downsample 
+#vosk parameters with usb sample rate; note that vosk will downsample to 16kHZ
 sample_rate = 44100
 channel = 1
 vosk_model = "vosk-model-small-en-us-0.15"

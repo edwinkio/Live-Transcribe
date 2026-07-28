@@ -8,6 +8,7 @@ An in depth view into the project architecture can be found [here](link).
 - Arduino Nano (other variants of the Arduino Uno also work)
 - Raspberry Pi / Personal Computer
 - SSD1306
+- USB Microphone
 
 ## Wiring Diagram
 <img width="1311" height="422" alt="image" src="https://github.com/user-attachments/assets/af09c418-bc76-45ef-a67e-20080caa15e0" />

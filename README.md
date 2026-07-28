@@ -1,7 +1,7 @@
 # Live Transcribe
 
 A tool that provides closed captions for conversations in real-time.
-An in depth view into the project architecture can be found [here](link).
+An in depth view into the project architecture can be found [here](https://edwinkio.github.io/blog/posts/Sophmore%20Year/Transcription_Device.html)).
 
 ## Requirements
 
